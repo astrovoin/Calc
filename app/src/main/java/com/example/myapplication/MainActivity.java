@@ -4,53 +4,81 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    EditText el1 = findViewById(R.id.num1);
-    EditText el2 = findViewById(R.id.num2);
-    TextView resText = findViewById(R.id.result);
+
+    TextView resText;
+    int c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final EditText el1 = findViewById(R.id.num1);
+        final EditText el2 = findViewById(R.id.num2);
+        resText = findViewById(R.id.result);
+
+        Button plusbtn = findViewById(R.id.plusbtn);
+        Button minusbtn = findViewById(R.id.minusbtn);
+        Button multiplybtn = findViewById(R.id.multiplybtn);
+        Button delbtn = findViewById(R.id.delbtn);
+
+
+        plusbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                process(Integer.parseInt(el1.getText().toString()), Integer.parseInt(el2.getText().toString()), '+');
+            }
+        });
+
+        minusbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                process(Integer.parseInt(el1.getText().toString()), Integer.parseInt(el2.getText().toString()), '-');
+            }
+        });
+
+        multiplybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                process(Integer.parseInt(el1.getText().toString()), Integer.parseInt(el2.getText().toString()), '*');
+            }
+        });
+
+        delbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                process(Integer.parseInt(el1.getText().toString()), Integer.parseInt(el2.getText().toString()), '/');
+            }
+        });
+
     }
 
-    public void onClickPlusBtn ( View v) {
 
-        int num1 = Integer.parseInt(el1.getText().toString());
-        int num2 = Integer.parseInt(el2.getText().toString());
-        int resSum = num1 + num2;
-        resText.setText(Integer.toString(resSum));
 
-    }
-    public void onClickMinusBtn ( View v) {
-
-        int num1 = Integer.parseInt(el1.getText().toString());
-        int num2 = Integer.parseInt(el2.getText().toString());
-        int resSum = num1 - num2;
-        resText.setText(Integer.toString(resSum));
-
-    }
-
-    public void onClickMultiplyBtn ( View v) {
-
-        int num1 = Integer.parseInt(el1.getText().toString());
-        int num2 = Integer.parseInt(el2.getText().toString());
-        int resSum = num1 * num2;
-        resText.setText(Integer.toString(resSum));
+    public void process(int a, int b, char target) {
+        switch (target) {
+            case '+':
+                c = a + b;
+                resText.setText(Integer.toString(c));
+                break;
+            case '-':
+                c = a - b;
+                resText.setText(Integer.toString(c));
+                break;
+            case '*':
+                c = a * b;
+                resText.setText(Integer.toString(c));
+                break;
+            case '/':
+                c = a / b;
+                resText.setText(Integer.toString(c));
+                break;
+        }
 
     }
-
-    public void onClickDelBtn ( View v) {
-
-        int num1 = Integer.parseInt(el1.getText().toString());
-        int num2 = Integer.parseInt(el2.getText().toString());
-        int resSum = num1 / num2;
-        resText.setText(Integer.toString(resSum));
-
-    }
-
 }
